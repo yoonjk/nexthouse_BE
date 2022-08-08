@@ -3,14 +3,15 @@
 <mapper namespace="com.demo.microservices.dao.RentCntrMgntDAO">
 	<select id="selectRentCntrAll" resultType="com.demo.microservices.model.RentCntrList">
 	SELECT
-		M.CNTR_DIV,
-		C.MODEL_NO,
-		C.MODEL_NM,
-		C.MODEL_ADDR,
-		M.PROGRESS,
-		M.RENT_ST_DT,
-		M.RENT_END_DT,
-		M.RENT_CNTR_NO
+	M.CNTR_DIV,
+	C.MODEL_NO,
+	C.MODEL_NM,
+	C.MODEL_ADDR,
+	C.PRICE,
+	M.PROGRESS,
+	M.RENT_ST_DT,
+	M.RENT_END_DT,
+	M.RENT_CNTR_NO
 	FROM
 		(
 			SELECT 

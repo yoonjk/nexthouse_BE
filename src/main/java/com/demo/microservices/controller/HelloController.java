@@ -1,7 +1,7 @@
 package com.demo.microservices.controller;
 
 
-import java.util.List;
+import java.util.List; 
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.demo.microservices.dao.RentCntrMgntDAO;
 import com.demo.microservices.dao.SampleUserDao;
 import com.demo.microservices.model.Hello;
+import com.demo.microservices.model.RentCntrList;
 import com.demo.microservices.model.SampleUser;
 
 import io.swagger.annotations.ApiImplicitParam;
@@ -35,6 +37,9 @@ public class HelloController {
 
 	@Autowired
 	private SampleUserDao sampleUserDao;
+	
+	@Autowired
+	private RentCntrMgntDAO rentCntrMgntDAO;
 
 	@Value("${garage.product.server}")
 	String productServer;
@@ -51,6 +56,25 @@ public class HelloController {
 		
 		return new Hello(vistorCounter.incrementAndGet(), String.format(msgTemplate, name));
 	}
+	
+	@ApiOperation(value="전체 임대계약목록 정보 가져오기")
+	@GetMapping(value="/RentCntrList/{rentCntrNo}")
+	public ResponseEntity <List<RentCntrList>> getRentCntrListAll(@PathVariable String rentCntrNo) { 
+		
+		List<RentCntrList> list = null;
+		try {
+			log.info("Start db select");
+			list = rentCntrMgntDAO.selectRentCntrAll(rentCntrNo);
+		} catch (Exception e) {
+			log.error("ERROR", e);
+			throw new RuntimeException(e);
+		}
+		
+		log.info("user counts :"+list.size());
+		
+		return new ResponseEntity<List<RentCntrList>> (list, HttpStatus.OK);
+	}
+	
 
 	@ApiOperation(value="사용자 목록 정보 가져오기")
 	@GetMapping(value="/users")
@@ -68,10 +92,10 @@ public class HelloController {
 		log.info("user counts :"+list.size());
 		
 		return new ResponseEntity<List<SampleUser>> (list, HttpStatus.OK);
-	}	
+	}
 	
 	@ApiOperation(value="사용자 정보 가져오기")
-	@GetMapping(value="/users/{userId}}")
+	@GetMapping(value="/users/{userId}")
 	public ResponseEntity <SampleUser> getUsrId(@PathVariable String userId) { 
 		
 		SampleUser user = null;

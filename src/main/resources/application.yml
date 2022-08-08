@@ -9,9 +9,9 @@ spring:
     
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${DB_SERVER:169.56.100.104}:${DB_PORT:32350}/${DB_NAME:demo}?useUnicode=true&characterEncoding=utf-8
-    username: ${DB_USERNAME:user00}
-    password: ${DB_PASSWORD:admin1234}
+    url: jdbc:mysql://${DB_SERVER:169.56.100.104}:${DB_PORT:31587}/${DB_NAME:nexthouse}?useUnicode=true&characterEncoding=utf-8
+    username: ${DB_USERNAME:admin}
+    password: ${DB_PASSWORD:960328}
     hikari:
       connection-timeout: 5000
       validation-timeout: 1000

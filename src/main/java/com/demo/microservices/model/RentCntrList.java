@@ -1,0 +1,21 @@
+package com.demo.microservices.model;
+import java.math.BigInteger;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+public class RentCntrList {
+	private String cntrDiv;
+	private String modelNo;
+	private String modelNm;
+	private String modelAddr;
+	private BigInteger price;
+	private int progress;
+	private String rentStDt;
+	private String rentEndDt;
+	private String rentCntrNo;
+}

@@ -2,46 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.microservices.dao.RentCntrMgntDAO">
 	<select id="selectRentCntrAll" resultType="com.demo.microservices.model.RentCntrList">
-	SELECT
-	M.CNTR_DIV,
-	C.MODEL_NO,
-	C.MODEL_NM,
-	C.MODEL_ADDR,
-	C.PRICE,
-	M.PROGRESS,
-	M.RENT_ST_DT,
-	M.RENT_END_DT,
-	M.RENT_CNTR_NO
-	FROM
-		(
-			SELECT 
-				IF(RENT_CNTR_STS_CD = 'A', '1_진행중계약', '3_종료된계약') AS 'CNTR_DIV',
-				A.MODEL_NO,
-				A.PROGRESS,
-				A.RENT_ST_DT,
-				A.RENT_END_DT,
-				A.RENT_CNTR_NO
-			FROM 
-				RENT_CNTR_INFO A
-			WHERE 1=1
-			  AND A.CUST_NO = #{custNo}
-			UNION ALL 
-			SELECT 
-				'2_찜목록' AS 'CNTR_DIV',
-				A.REG_MODEL_NO AS MODEL_NO,
-				NULL AS PROCESS,
-				NULL AS RENT_ST_DT,
-				NULL AS RENT_END_DT,
-				NULL AS RENT_CNTR_NO
-			FROM 
-				CUST_REG_MODEL_LST A
-			WHERE 1=1
-			  AND A.CUST_NO = #{custNo}
-		) M
-		JOIN
-		MODEL_INFO C
-			ON M.MODEL_NO = C.MODEL_NO
-	ORDER BY CNTR_DIV
+		SELECT
+		M.CNTR_DIV,
+		C.MODEL_NO,
+		C.MODEL_NM,
+		C.MODEL_ADDR,
+		C.PRICE,
+		M.PROGRESS,
+		M.RENT_ST_DT,
+		M.RENT_END_DT,
+		M.RENT_CNTR_NO
+		FROM
+			(
+				SELECT 
+					IF(RENT_CNTR_STS_CD = 'A', '1_진행중계약', '3_종료된계약') AS 'CNTR_DIV',
+					A.MODEL_NO,
+					A.PROGRESS,
+					A.RENT_ST_DT,
+					A.RENT_END_DT,
+					A.RENT_CNTR_NO
+				FROM 
+					RENT_CNTR_INFO A
+				WHERE 1=1
+				  AND A.CUST_NO = #{custNo}
+				UNION ALL 
+				SELECT 
+					'2_찜목록' AS 'CNTR_DIV',
+					A.REG_MODEL_NO AS MODEL_NO,
+					NULL AS PROCESS,
+					NULL AS RENT_ST_DT,
+					NULL AS RENT_END_DT,
+					NULL AS RENT_CNTR_NO
+				FROM 
+					CUST_REG_MODEL_LST A
+				WHERE 1=1
+				  AND A.CUST_NO = #{custNo}
+			) M
+			JOIN
+			MODEL_INFO C
+				ON M.MODEL_NO = C.MODEL_NO
+		ORDER BY CNTR_DIV
 	</select>
 	<insert id="insertRentCntr" parameterType="com.demo.microservices.model.RentCntrList">
 		INSERT INTO RENT_CNTR_INFO 

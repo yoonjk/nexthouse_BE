@@ -1,7 +1,7 @@
 package com.demo.microservices.controller;
 
 
-import java.util.List; 
+import java.util.List;  
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.demo.microservices.dao.RentCntrMgntDAO;
-import com.demo.microservices.dao.SampleUserDao;
-import com.demo.microservices.model.Hello;
 import com.demo.microservices.model.RentCntrList;
-import com.demo.microservices.model.SampleUser;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -34,9 +31,6 @@ import lombok.extern.slf4j.Slf4j;
 public class RentMgntController {
 	private String msgTemplate = "%s 님 반갑습니다.";
 	private final AtomicLong vistorCounter = new AtomicLong();
-
-	@Autowired
-	private SampleUserDao sampleUserDao;
 	
 	@Autowired
 	private RentCntrMgntDAO rentCntrMgntDAO;

@@ -18,4 +18,6 @@ public interface RentCntrMgntDAO {
 	int insertRentCntr(String custNo, String modelNo);
 	
 	int deleteCustRegModel(String custNo, String modelNo);
+	
+	int updateRentCntrStep(String rentCntrNo, int progress, char cd);
 }

@@ -69,4 +69,10 @@
 		WHERE CUST_NO = #{custNo} 
 		  AND REG_MODEL_NO = #{modelNo};
 	</delete>
+	<update id="updateRentCntrStep" parameterType="com.demo.microservices.model.RentCntrList">
+		UPDATE RENT_CNTR_INFO
+		   SET RENT_CNTR_STS_CD = #{cd},
+		       progress = #{progress}
+		 WHERE RENT_CNTR_NO = #{rentCntrNo}
+	</update>
 </mapper>

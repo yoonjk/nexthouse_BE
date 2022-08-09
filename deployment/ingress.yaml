@@ -1,17 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: user04-svc
+  name: nexthouse-svc
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
   tls:
   - secretName: tls-secret
   rules:
-  - host: "user04.169.56.100.104.nip.io"
+  - host: "nexthouse.169.56.100.104.nip.io"
     http:
       paths:
-      - path: /user04
+      - path: /nexthouse
         pathType: Prefix
         backend:
           service:

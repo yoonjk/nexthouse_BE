@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: sample-config
 data:
-  SERVLET_CONTEXT_PATH: "/user04"
+  SERVLET_CONTEXT_PATH: "/nexthouse"
 # MYSQL DB
   DB_SERVER: mysql.mysql
   DB_PORT: "3306"

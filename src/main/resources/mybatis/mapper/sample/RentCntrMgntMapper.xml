@@ -43,4 +43,30 @@
 			ON M.MODEL_NO = C.MODEL_NO
 	ORDER BY CNTR_DIV
 	</select>
+	<insert id="insertRentCntr" parameterType="com.demo.microservices.model.RentCntrList">
+		INSERT INTO RENT_CNTR_INFO 
+			(CUST_NO, 
+			MODEL_NO, 
+			RENT_CNTR_STS_CD, 
+			PROGRESS, 
+			CREATE_DT, 
+			RENT_ST_DT, 
+			RENT_END_DT)
+		SELECT 
+			CUST_NO, 
+			REG_MODEL_NO, 
+			'A', 
+			1, 
+			CURRENT_DATE, 
+			NULL, 
+			NULL 
+		FROM CUST_REG_MODEL_LST 
+		WHERE CUST_NO = #{custNo} 
+		  AND REG_MODEL_NO = #{modelNo};
+	</insert>
+	<delete id="deleteCustRegModel" parameterType="com.demo.microservices.model.RentCntrList">
+		DELETE FROM CUST_REG_MODEL_LST 
+		WHERE CUST_NO = #{custNo} 
+		  AND REG_MODEL_NO = #{modelNo};
+	</delete>
 </mapper>

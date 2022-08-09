@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-public class HelloController {
+public class RentMgntController {
 	private String msgTemplate = "%s 님 반갑습니다.";
 	private final AtomicLong vistorCounter = new AtomicLong();
 
@@ -47,15 +47,7 @@ public class HelloController {
 	@Value("${garage.product.port}")
 	String productPort;
 	
-	@ApiOperation(value="Hello API 입니다.")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="name", value="이름", required=true, dataType="String", paramType="query", defaultValue="홍길동")
-	})
-	@GetMapping("/hello")
-	public Hello getHelloMsg(@RequestParam(value="name") String name) {
-		
-		return new Hello(vistorCounter.incrementAndGet(), String.format(msgTemplate, name));
-	}
+
 	
 	@ApiOperation(value="전체 임대계약목록 정보 가져오기")
 	@GetMapping(value="/RentCntrList/{rentCntrNo}")
@@ -74,7 +66,23 @@ public class HelloController {
 		
 		return new ResponseEntity<List<RentCntrList>> (list, HttpStatus.OK);
 	}
-	
+
+	@ApiOperation(value="고객선호모델임대계약등록")
+	@PostMapping(value="/RentCntrIn/custNo={custNo}&modelNo={modelNo}")
+	public ResponseEntity <String> insertRentCntr(@PathVariable String custNo, @PathVariable String modelNo ) { 
+		
+		String msg = null;
+		
+		try {
+			rentCntrMgntDAO.insertRentCntr(custNo, modelNo);
+			rentCntrMgntDAO.deleteCustRegModel(custNo, modelNo);
+		} catch (Exception e) {
+			log.error("ERROR", e);
+			throw new RuntimeException(e);
+		}
+		msg = "임대계약등록 성공";
+		return new ResponseEntity<String> (msg, HttpStatus.OK);
+	}
 
 	@ApiOperation(value="사용자 목록 정보 가져오기")
 	@GetMapping(value="/users")

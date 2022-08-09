@@ -14,4 +14,8 @@ public interface RentCntrMgntDAO {
 	 * @throws Exception
 	 */
 	List<RentCntrList> selectRentCntrAll(String rentCntrNo) throws Exception;
+	
+	int insertRentCntr(String custNo, String modelNo);
+	
+	int deleteCustRegModel(String custNo, String modelNo);
 }

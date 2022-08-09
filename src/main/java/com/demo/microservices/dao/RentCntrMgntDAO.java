@@ -13,7 +13,7 @@ public interface RentCntrMgntDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	List<RentCntrList> selectRentCntrAll(String rentCntrNo) throws Exception;
+	List<RentCntrList> selectRentCntrAll(String custNo) throws Exception;
 	
 	int insertRentCntr(String custNo, String modelNo);
 	

@@ -24,7 +24,7 @@
 			FROM 
 				RENT_CNTR_INFO A
 			WHERE 1=1
-			  AND A.CUST_NO = #{rentCntrNo}
+			  AND A.CUST_NO = #{custNo}
 			UNION ALL 
 			SELECT 
 				'2_찜목록' AS 'CNTR_DIV',
@@ -36,7 +36,7 @@
 			FROM 
 				CUST_REG_MODEL_LST A
 			WHERE 1=1
-			  AND A.CUST_NO = #{rentCntrNo}
+			  AND A.CUST_NO = #{custNo}
 		) M
 		JOIN
 		MODEL_INFO C

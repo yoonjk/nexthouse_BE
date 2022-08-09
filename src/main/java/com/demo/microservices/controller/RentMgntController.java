@@ -50,13 +50,13 @@ public class RentMgntController {
 
 	
 	@ApiOperation(value="전체 임대계약목록 정보 가져오기")
-	@GetMapping(value="/RentCntrList/{rentCntrNo}")
-	public ResponseEntity <List<RentCntrList>> getRentCntrListAll(@PathVariable String rentCntrNo) { 
+	@GetMapping(value="/RentCntrList/{custNo}")
+	public ResponseEntity <List<RentCntrList>> getRentCntrListAll(@PathVariable String custNo) { 
 		
 		List<RentCntrList> list = null;
 		try {
 			log.info("Start db select");
-			list = rentCntrMgntDAO.selectRentCntrAll(rentCntrNo);
+			list = rentCntrMgntDAO.selectRentCntrAll(custNo);
 		} catch (Exception e) {
 			log.error("ERROR", e);
 			throw new RuntimeException(e);

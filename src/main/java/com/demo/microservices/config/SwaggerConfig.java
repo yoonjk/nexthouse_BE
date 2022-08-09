@@ -26,8 +26,8 @@ public class SwaggerConfig  {
 	 
 	    private ApiInfo apiInfo() {
 	        return new ApiInfoBuilder()
-	                .title("nextHouse팀의 REST API")
-	                .description("nextHouse팀의 REST API 입니다. ")
+	                .title("nextHouse팀의 Garage REST API")
+	                .description("nextHouse팀의 Garage의 REST API 입니다. ")
 	                .build();
 	 
 	    }

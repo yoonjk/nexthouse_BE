@@ -68,8 +68,8 @@ public class RentMgntController {
 		String msg = null;
 		
 		try {
-			rentCntrMgntDAO.insertRentCntr(custNo, modelNo);
 			rentCntrMgntDAO.deleteCustRegModel(custNo, modelNo);
+			rentCntrMgntDAO.insertRentCntr(custNo, modelNo);
 		} catch (Exception e) {
 			log.error("ERROR", e);
 			throw new RuntimeException(e);

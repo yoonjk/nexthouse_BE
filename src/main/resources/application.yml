@@ -17,7 +17,7 @@ spring:
       validation-timeout: 1000
       maximum-pool-size: 30
       minimum-idle: 2
-      connection-test-query: SELECT 1    
+      connection-test-query: SELECT 1
 
 #MyBatis
 mybatis:

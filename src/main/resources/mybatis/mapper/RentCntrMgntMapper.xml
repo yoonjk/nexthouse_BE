@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.microservices.dao.RentCntrMgntDAO">
-	<select id="selectRentCntrAll" resultType="com.demo.microservices.model.RentCntrList">
+	<select id="selectRentCntrAll" resultType="com.demo.microservices.model.RentCntr">
 		SELECT
 		M.CNTR_DIV,
 		C.MODEL_NO,
@@ -43,7 +43,7 @@
 				ON M.MODEL_NO = C.MODEL_NO
 		ORDER BY CNTR_DIV
 	</select>
-	<insert id="insertRentCntr" parameterType="com.demo.microservices.model.RentCntrList">
+	<insert id="insertRentCntr" parameterType="com.demo.microservices.model.RentCntr">
 		INSERT INTO RENT_CNTR_INFO 
 			(CUST_NO, 
 			MODEL_NO, 
@@ -64,12 +64,12 @@
 		WHERE CUST_NO = #{custNo} 
 		  AND REG_MODEL_NO = #{modelNo};
 	</insert>
-	<delete id="deleteCustRegModel" parameterType="com.demo.microservices.model.RentCntrList">
+	<delete id="deleteCustRegModel" parameterType="com.demo.microservices.model.RentCntr">
 		DELETE FROM CUST_REG_MODEL_LST 
 		WHERE CUST_NO = #{custNo} 
 		  AND REG_MODEL_NO = #{modelNo};
 	</delete>
-	<update id="updateRentCntrStep" parameterType="com.demo.microservices.model.RentCntrList">
+	<update id="updateRentCntrStep" parameterType="com.demo.microservices.model.RentCntr">
 		UPDATE RENT_CNTR_INFO
 		   SET RENT_CNTR_STS_CD = #{cd},
 		       progress = #{progress}

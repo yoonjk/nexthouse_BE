@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.microservices.dao.AdsrMgntDAO">
+	<select id="selectAdsrAll" resultType="com.demo.microservices.model.AdsrMgnt">
+		SELECT 
+			CM.CUST_NO,
+			CM.MSG,
+			CM.MSG_TIME,
+			CM.SEND_ID,
+			CM.ADSR_NO,
+			A.ADSR_NM,
+			A.DEPARTMENT_NM,
+			A.DTL_INFO
+		FROM
+			CUST_ADSR_MSG_LIST CM
+			JOIN
+			ADSR_INFO A
+				ON A.ADSR_NO = CM.ADSR_NO
+		WHERE 1=1
+		  AND CM.CUST_NO = #{custNo}
+		ORDER BY MSG_TIME
+	</select>
+</mapper>

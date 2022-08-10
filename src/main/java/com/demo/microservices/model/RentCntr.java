@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class RentCntrList {
+public class RentCntr {
 	private String cntrDiv;
 	private String modelNo;
 	private String modelNm;

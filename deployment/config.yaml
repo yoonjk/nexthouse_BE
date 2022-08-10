@@ -5,8 +5,8 @@ metadata:
 data:
   SERVLET_CONTEXT_PATH: "/nexthouse"
 # MYSQL DB
-  DB_SERVER: mysql.mysql
-  DB_PORT: "31587"
+  DB_SERVER: mysql-nexthouse
+  DB_PORT: "3306"
   DB_USERNAME: admin
   DB_PASSWORD: "960328"
   

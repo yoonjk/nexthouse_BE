@@ -46,3 +46,8 @@ spec:
             configMapKeyRef:
               name: nexthouse-config
               key: SERVLET_CONTEXT_PATH
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: nexthouse-config
+              key: DB_NAME

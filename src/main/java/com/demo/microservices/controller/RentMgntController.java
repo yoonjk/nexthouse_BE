@@ -49,7 +49,7 @@ public class RentMgntController {
 		return new ResponseEntity<List<RentCntrList>> (list, HttpStatus.OK);
 	}
 
-	@ApiOperation(value="고객선호모델임대계약등록########")
+	@ApiOperation(value="고객선호모델임대계약등록")
 	@PostMapping(value="/RentCntrIn/custNo={custNo}&modelNo={modelNo}")
 	public ResponseEntity <String> insertRentCntr(@PathVariable String custNo, @PathVariable String modelNo ) { 
 		

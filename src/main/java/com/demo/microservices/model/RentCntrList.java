@@ -13,7 +13,7 @@ public class RentCntrList {
 	private String modelNo;
 	private String modelNm;
 	private String modelAddr;
-	private BigInteger price;
+	private String price;
 	private int progress;
 	private String rentStDt;
 	private String rentEndDt;

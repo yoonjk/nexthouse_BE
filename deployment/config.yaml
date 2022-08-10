@@ -9,4 +9,3 @@ data:
   DB_PORT: "3306"
   DB_USERNAME: admin
   DB_PASSWORD: "960328"
-  

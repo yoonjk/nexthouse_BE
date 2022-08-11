@@ -103,4 +103,16 @@
 		WHERE 1=1
 		AND RENT_CNTR_NO = #{rentCntrNo}
 	</select>
+	<select id="selectRentDepoSendInfo" resultType="com.demo.microservices.model.RentDepoSendInfo">
+		SELECT 
+			C.CUST_NM,
+			C.ACCT_BANK_NM,
+			C.ACCT_NO,
+			CURRENT_DATE AS CNTR_DT,
+			(SELECT PRICE FROM MODEL_INFO WHERE MODEL_NO = (SELECT MAX(MODEL_NO) FROM RENT_CNTR_INFO WHERE CUST_NO = #{custNo} AND RENT_CNTR_STS_CD = 'A' )) AS PRICE
+		FROM
+			CUST_INFO C
+		WHERE 1=1
+		  AND C.CUST_NO = #{custNo}
+	</select>
 </mapper>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.demo.microservices.dao.RentCntrMgntDAO;
 import com.demo.microservices.model.RentCntr;
 import com.demo.microservices.model.RentCntrRslt;
+import com.demo.microservices.model.RentDepoSendInfo;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -110,6 +111,26 @@ public class RentMgntController {
 		log.info("user counts :"+list.size());
 		
 		return new ResponseEntity<List<RentCntrRslt>> (list, HttpStatus.OK);
+	}
+	
+	@ApiOperation(value="임대보증금송금정보조회")
+	@GetMapping(value="/RentDepoSndInf/{custNo}")
+	public ResponseEntity <List<RentDepoSendInfo>> getRentDepoSndInf(@PathVariable String custNo) { 
+		
+		List<RentDepoSendInfo> list = null;
+		
+		try {
+			log.info("Start db select");
+			list = rentCntrMgntDAO.selectRentDepoSendInfo(custNo);
+			log.info("End db select");
+		} catch (Exception e) {
+			log.error("ERROR", e);
+			throw new RuntimeException(e);
+		}
+		
+		log.info("user counts :"+list.size());
+		
+		return new ResponseEntity<List<RentDepoSendInfo>> (list, HttpStatus.OK);
 	}
 }
 

@@ -88,8 +88,8 @@
 	<select id="selectRentCntrRslt" resultType="com.demo.microservices.model.RentCntrRslt">
 		SELECT 
 			M.MODEL_ADDR,
-			M.ONWER_NM,
-			M.ONWER_TEL_NO,
+			M.OWNER_NM,
+			M.OWNER_TEL_NO,
 			M.PRICE,
 			R.FIX_DT,
 			R.ENT_DT,

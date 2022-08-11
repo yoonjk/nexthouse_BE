@@ -9,8 +9,8 @@ import lombok.ToString;
 @ToString
 public class RentCntrRslt {
 	private String modelAddr;
-	private String onwerNm;
-	private String onwerTelNo;
+	private String ownerNm;
+	private String ownerTelNo;
 	private String price;
 	private String fixDt;
 	private String entDt;

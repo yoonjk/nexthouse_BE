@@ -7,17 +7,29 @@
 			CM.MSG,
 			CM.MSG_TIME,
 			CM.SEND_ID,
-			CM.ADSR_NO,
 			A.ADSR_NM,
 			A.DEPARTMENT_NM,
 			A.DTL_INFO
 		FROM
 			CUST_ADSR_MSG_LIST CM
-			JOIN
+			LEFT JOIN
 			ADSR_INFO A
-				ON A.ADSR_NO = CM.ADSR_NO
+				ON A.ADSR_NO = CM.SEND_ID
 		WHERE 1=1
 		  AND CM.CUST_NO = #{custNo}
+		  AND CM.MSG_TIME > IFNULL(#{msgTime},'1999-12-31 23:59:59')
 		ORDER BY MSG_TIME
 	</select>
+	<insert id="insertAdsr" parameterType="com.demo.microservices.model.AdsrMgnt">
+		INSERT INTO CUST_ADSR_MSG_LIST 
+			(CUST_NO,
+			MSG_TIME, 
+			MSG, 
+			SEND_ID)
+		VALUES 
+			(#{custNo}, 
+			CURRENT_TIMESTAMP(), 
+			#{msg},
+			#{sendId})
+	</insert>
 </mapper>

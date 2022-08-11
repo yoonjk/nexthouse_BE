@@ -72,7 +72,9 @@
 	<update id="updateRentCntrStep" parameterType="com.demo.microservices.model.RentCntr">
 		UPDATE RENT_CNTR_INFO
 		   SET RENT_CNTR_STS_CD = #{cd},
-		       progress = #{progress}
+		       PROGRESS = #{progress},
+		       RENT_ST_DT = #{rentStDt},
+		       RENT_END_DT = DATE_ADD(#{rentStDt}, INTERVAL 2 YEAR)
 		 WHERE RENT_CNTR_NO = #{rentCntrNo}
 	</update>
 </mapper>

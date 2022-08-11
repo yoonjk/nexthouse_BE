@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.microservices.dao.AdsrMgntDAO;
@@ -37,9 +38,11 @@ public class AdsrMgntController {
 	public ResponseEntity <List<AdsrMgnt>> getselectAdsrAll(@PathVariable String custNo) { 
 		
 		List<AdsrMgnt> list = null;
+		String msgTime = null;
+		
 		try {
 			log.info("Start db select");
-			list = adsrMgntDAO.selectAdsrAll(custNo);
+			list = adsrMgntDAO.selectAdsrAll(custNo, msgTime);
 		} catch (Exception e) {
 			log.error("ERROR", e);
 			throw new RuntimeException(e);
@@ -50,4 +53,29 @@ public class AdsrMgntController {
 		return new ResponseEntity<List<AdsrMgnt>> (list, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="채팅 등록이후 상담이력 가져오기")
+	@PostMapping(value="/inselAdsr")
+	public ResponseEntity <List<AdsrMgnt>> inselAdsr(@RequestBody AdsrMgnt adsrMgnt) { 
+		
+		//List<AdsrMgnt> list = null;
+		int rc = 0;
+		String msg = null;
+		List<AdsrMgnt> list = null;
+		
+		try {
+			log.info("Start insert DB");
+			rc = adsrMgntDAO.insertAdsr(adsrMgnt);
+			log.info("End insert DB");
+			list = adsrMgntDAO.selectAdsrAll(adsrMgnt.getCustNo(), adsrMgnt.getMsgTime().toString());
+		} catch (Exception e) {
+			log.error("ERROR", e);
+			throw new RuntimeException(e);
+		}
+		
+		if (rc > 0) {
+			msg =  "등록 성공";
+		}
+
+		return new ResponseEntity<List<AdsrMgnt>>(list, HttpStatus.OK);
+	}
 }

@@ -1,6 +1,7 @@
 package com.demo.microservices.controller;
 
 
+import java.time.LocalDate;
 import java.util.List; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,8 +29,6 @@ public class RentMgntController {
 	
 	@Value("${garage.product.port}")
 	String productPort;
-	
-
 	
 	@ApiOperation(value="전체 임대계약목록 정보 가져오기")
 	@GetMapping(value="/RentCntrList/{custNo}")
@@ -71,13 +70,15 @@ public class RentMgntController {
 	public ResponseEntity <String> updateRentCntrStep(@PathVariable String rentCntrNo, @PathVariable int progress ) { 
 		
 		String msg = null;
+		String rentStDt = null;
+		
 		char cd = 'A';
 		progress = progress + 1;
 		
-		if(progress == 5) { cd = 'C'; }
+		if(progress == 5) { cd = 'C'; rentStDt = LocalDate.now().toString(); }
 		
 		try {
-			rentCntrMgntDAO.updateRentCntrStep(rentCntrNo, progress, cd);
+			rentCntrMgntDAO.updateRentCntrStep(rentCntrNo, progress, cd, rentStDt);
 		} catch (Exception e) {
 			log.error("ERROR", e);
 			throw new RuntimeException(e);

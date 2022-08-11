@@ -13,5 +13,7 @@ public interface AdsrMgntDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	List<AdsrMgnt> selectAdsrAll(String custNo) throws Exception;
+	List<AdsrMgnt> selectAdsrAll(String custNo, String msgTime) throws Exception;
+	
+	int insertAdsr(AdsrMgnt adsrMgnt) throws Exception;
 }

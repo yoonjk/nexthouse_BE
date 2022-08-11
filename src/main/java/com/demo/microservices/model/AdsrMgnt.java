@@ -12,7 +12,7 @@ import lombok.ToString;
 public class AdsrMgnt {
 	private String custNo;
 	private String msg;
-	private Timestamp msgTime;
+	private String msgTime;
 	private String sendId;
 	private String adsrNo;
 	private String adsrNm;

@@ -1,5 +1,6 @@
 package com.demo.microservices.dao;
 
+import java.time.LocalDate;
 import java.util.List; 
 
 import org.apache.ibatis.annotations.Mapper;
@@ -19,5 +20,5 @@ public interface RentCntrMgntDAO {
 	
 	int deleteCustRegModel(String custNo, String modelNo);
 	
-	int updateRentCntrStep(String rentCntrNo, int progress, char cd);
+	int updateRentCntrStep(String rentCntrNo, int progress, char cd, String rentStDt);
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.demo.microservices.model.RentCntr;
+import com.demo.microservices.model.RentCntrRslt;
 
 @Mapper
 public interface RentCntrMgntDAO {
@@ -20,5 +21,7 @@ public interface RentCntrMgntDAO {
 	
 	int deleteCustRegModel(String custNo, String modelNo);
 	
-	int updateRentCntrStep(String rentCntrNo, int progress, char cd, String rentStDt);
+	int updateRentCntrStep(String rentCntrNo, int progress, char cd, String rentStDt, String fixDt, String entDt);
+	
+	List<RentCntrRslt> selectRentCntrRslt(String rentCntrNo) throws Exception;
 }

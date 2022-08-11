@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.demo.microservices.dao.RentCntrMgntDAO;
 import com.demo.microservices.model.RentCntr;
+import com.demo.microservices.model.RentCntrRslt;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -71,20 +72,44 @@ public class RentMgntController {
 		
 		String msg = null;
 		String rentStDt = null;
+		String fixDt = null;
+		String entDt = null;
 		
 		char cd = 'A';
 		progress = progress + 1;
 		
-		if(progress == 5) { cd = 'C'; rentStDt = LocalDate.now().toString(); }
+		if(progress == 3) { fixDt = LocalDate.now().toString(); }
+		else if(progress == 4) { entDt = LocalDate.now().toString(); }
+		else if(progress == 5) { cd = 'C'; rentStDt = LocalDate.now().toString(); }
 		
 		try {
-			rentCntrMgntDAO.updateRentCntrStep(rentCntrNo, progress, cd, rentStDt);
+			rentCntrMgntDAO.updateRentCntrStep(rentCntrNo, progress, cd, rentStDt, fixDt, entDt);
 		} catch (Exception e) {
 			log.error("ERROR", e);
 			throw new RuntimeException(e);
 		}
 		msg = "임대계약다음단계처리";
 		return new ResponseEntity<String> (msg, HttpStatus.OK);
+	}
+	
+	@ApiOperation(value="임대계약결과조회")
+	@GetMapping(value="/RentCntrRslt/{rentCntrNo}")
+	public ResponseEntity <List<RentCntrRslt>> getRentCntrRslt(@PathVariable String rentCntrNo) { 
+		
+		List<RentCntrRslt> list = null;
+		
+		try {
+			log.info("Start db select");
+			list = rentCntrMgntDAO.selectRentCntrRslt(rentCntrNo);
+			log.info("End db select");
+		} catch (Exception e) {
+			log.error("ERROR", e);
+			throw new RuntimeException(e);
+		}
+		
+		log.info("user counts :"+list.size());
+		
+		return new ResponseEntity<List<RentCntrRslt>> (list, HttpStatus.OK);
 	}
 }
 

@@ -71,10 +71,36 @@
 	</delete>
 	<update id="updateRentCntrStep" parameterType="com.demo.microservices.model.RentCntr">
 		UPDATE RENT_CNTR_INFO
-		   SET RENT_CNTR_STS_CD = #{cd},
-		       PROGRESS = #{progress},
+		   SET <if test="rentStDt != null">
 		       RENT_ST_DT = #{rentStDt},
-		       RENT_END_DT = DATE_ADD(#{rentStDt}, INTERVAL 2 YEAR)
+		       RENT_END_DT = DATE_ADD(#{rentStDt}, INTERVAL 2 YEAR),
+		       </if>
+		       <if test="fixDt != null">
+		       FIX_DT = #{fixDt},
+		       </if>
+		       <if test="entDt != null">
+		       ENT_DT = #{entDt},
+		       </if>
+		       RENT_CNTR_STS_CD = #{cd},
+		       PROGRESS = #{progress}
 		 WHERE RENT_CNTR_NO = #{rentCntrNo}
 	</update>
+	<select id="selectRentCntrRslt" resultType="com.demo.microservices.model.RentCntrRslt">
+		SELECT 
+			M.MODEL_ADDR,
+			M.ONWER_NM,
+			M.ONWER_TEL_NO,
+			M.PRICE,
+			R.FIX_DT,
+			R.ENT_DT,
+			R.RENT_ST_DT,
+			R.RENT_END_DT 
+		FROM
+			RENT_CNTR_INFO R
+			JOIN
+			MODEL_INFO M
+				ON R.MODEL_NO = M.MODEL_NO
+		WHERE 1=1
+		AND RENT_CNTR_NO = #{rentCntrNo}
+	</select>
 </mapper>

@@ -32,4 +32,18 @@
 			#{msg},
 			#{sendId})
 	</insert>
+	<select id="adsrSearch" resultType="com.demo.microservices.model.AdsrSearch">
+		SELECT 
+			A.ADSR_NO,
+			A.ADSR_NM,
+			A.DEPARTMENT_NM,
+			A.DTL_INFO
+		FROM 
+			CUST_ADSR_REL_HST CH
+			JOIN
+			ADSR_INFO A
+				ON A.ADSR_NO = CH.ADSR_NO
+		WHERE CH.CUST_NO = #{custNo}
+		  AND CH.EFCT_FNS_DT > '9999-12-31';
+	</select>
 </mapper>

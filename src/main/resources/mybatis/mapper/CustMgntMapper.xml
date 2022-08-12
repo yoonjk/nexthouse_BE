@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.microservices.dao.CustMgntDAO">
+	<select id="selectUsePossCust" resultType="com.demo.microservices.model.UsePossCust">
+		SELECT
+			CUST_NO,
+			CUST_NM,
+			USE_CNT
+		FROM
+			CUST_INFO
+	</select>
+	<update id="updateCustUseCnt" parameterType="string">
+		UPDATE CUST_INFO
+		   SET USE_CNT = USE_CNT + 1
+		 WHERE 1=1
+		   AND CUST_NO = #{custNo}
+	</update>
+</mapper>

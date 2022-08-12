@@ -14,6 +14,9 @@ public class RentCntr {
 	private String modelNm;
 	private String modelAddr;
 	private String price;
+	private String ownerNm;
+	private String ownerTelNo;
+	private String modelSpec;
 	private int progress;
 	private String rentStDt;
 	private String rentEndDt;

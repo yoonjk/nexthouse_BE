@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +34,7 @@ public class RentMgntController {
 	String productPort;
 	
 	@ApiOperation(value="전체 임대계약목록 정보 가져오기")
+	@CrossOrigin(originPatterns = "http://localhost:8080")
 	@GetMapping(value="/RentCntrList/{custNo}")
 	public ResponseEntity <List<RentCntr>> getRentCntrListAll(@PathVariable String custNo) { 
 		

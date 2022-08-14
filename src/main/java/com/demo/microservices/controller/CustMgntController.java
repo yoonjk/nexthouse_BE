@@ -33,7 +33,7 @@ public class CustMgntController {
 	String productPort;
 	
 	@ApiOperation(value="사용가능유저리스트조회")
-	@CrossOrigin(originPatterns = "http://nexthouse-fe.kbfg.kubepia.com")
+	@CrossOrigin
 	@GetMapping(value="/UsePossCust")
 	public ResponseEntity <List<UsePossCust>> getUsePossCustAll() { 
 		
@@ -55,7 +55,7 @@ public class CustMgntController {
 	}
 	
 	@ApiOperation(value="사용자 수정")
-	@CrossOrigin(originPatterns = "http://nexthouse-fe.kbfg.kubepia.com")
+	@CrossOrigin
 	@PutMapping(value="/CustUseCnt/{custNo}")
 	public ResponseEntity <String> updateCustUseCnt(@PathVariable String custNo) { 
 		

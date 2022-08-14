@@ -122,11 +122,11 @@ podTemplate(containers: [
 			// Deploy App to Cluster in Kubernetes
 			stage( "Deploy to Cluster" ) {
 				container("kubectl") {
-					#sh "kubectl apply -n ${namespace} -f ${config}"
+					//sh "kubectl apply -n ${namespace} -f ${config}"
 					sh "kubectl apply -n ${namespace} -f ${deployment}"
-					#sh "sleep 5"
-					#sh "kubectl apply -n ${namespace} -f ${service}"
-					#sh "kubectl apply -n ${namespace} -f ${ingress}"
+					//sh "sleep 5"
+					//sh "kubectl apply -n ${namespace} -f ${service}"
+					//sh "kubectl apply -n ${namespace} -f ${ingress}"
 				}
 			}
             echo "**** FINISH ALL STAGES : SUCCESS"

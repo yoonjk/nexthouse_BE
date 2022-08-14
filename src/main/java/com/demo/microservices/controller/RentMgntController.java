@@ -34,7 +34,7 @@ public class RentMgntController {
 	String productPort;
 	
 	@ApiOperation(value="전체 임대계약목록 정보 가져오기")
-	@CrossOrigin(originPatterns = "http://nexthouse-fe.kbfg.kubepia.com")
+	@CrossOrigin(originPatterns = "http://nexthouse-fe.kbfg.kubepia.com, http://localhost:8080")
 	@GetMapping(value="/RentCntrList/{custNo}")
 	public ResponseEntity <List<RentCntr>> getRentCntrListAll(@PathVariable String custNo) { 
 		

@@ -33,7 +33,7 @@ public class RentMgntController {
 	@Value("${garage.product.port}")
 	String productPort;
 	
-	@ApiOperation(value="전체 임대계약목록 정보 가져오기")
+	@ApiOperation(value="전체 임대계약목록 정보 가져오기####잘 변경되는지 테스트입니당")
 	@CrossOrigin
 	@GetMapping(value="/RentCntrList/{custNo}")
 	public ResponseEntity <List<RentCntr>> getRentCntrListAll(@PathVariable String custNo) { 

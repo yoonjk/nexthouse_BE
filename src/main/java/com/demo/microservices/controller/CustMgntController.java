@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,7 +32,8 @@ public class CustMgntController {
 	@Value("${garage.product.port}")
 	String productPort;
 	
-	@ApiOperation(value="전체 임대계약목록 정보 가져오기")
+	@ApiOperation(value="사용가능유저리스트조회")
+	@CrossOrigin(originPatterns = "http://nexthouse-fe.kbfg.kubepia.com")
 	@GetMapping(value="/UsePossCust")
 	public ResponseEntity <List<UsePossCust>> getUsePossCustAll() { 
 		
@@ -53,6 +55,7 @@ public class CustMgntController {
 	}
 	
 	@ApiOperation(value="사용자 수정")
+	@CrossOrigin(originPatterns = "http://nexthouse-fe.kbfg.kubepia.com")
 	@PutMapping(value="/CustUseCnt/{custNo}")
 	public ResponseEntity <String> updateCustUseCnt(@PathVariable String custNo) { 
 		

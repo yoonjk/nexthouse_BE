@@ -53,6 +53,7 @@ public class RentMgntController {
 	}
 
 	@ApiOperation(value="고객선호모델임대계약등록")
+	@CrossOrigin(originPatterns = "http://nexthouse-fe.kbfg.kubepia.com")
 	@PostMapping(value="/RentCntrIn/custNo={custNo}&modelNo={modelNo}")
 	public ResponseEntity <String> insertRentCntr(@PathVariable String custNo, @PathVariable String modelNo ) { 
 		
@@ -70,6 +71,7 @@ public class RentMgntController {
 	}
 	
 	@ApiOperation(value="임대계약다음단계처리")
+	@CrossOrigin(originPatterns = "http://nexthouse-fe.kbfg.kubepia.com")
 	@PostMapping(value="/RentCntrNextStep/rentCntrNo={rentCntrNo}&progress={progress}")
 	public ResponseEntity <String> updateRentCntrStep(@PathVariable String rentCntrNo, @PathVariable int progress ) { 
 		
@@ -96,6 +98,7 @@ public class RentMgntController {
 	}
 	
 	@ApiOperation(value="임대계약결과조회")
+	@CrossOrigin(originPatterns = "http://nexthouse-fe.kbfg.kubepia.com")
 	@GetMapping(value="/RentCntrRslt/{rentCntrNo}")
 	public ResponseEntity <List<RentCntrRslt>> getRentCntrRslt(@PathVariable String rentCntrNo) { 
 		
@@ -116,6 +119,7 @@ public class RentMgntController {
 	}
 	
 	@ApiOperation(value="임대보증금송금정보조회")
+	@CrossOrigin(originPatterns = "http://nexthouse-fe.kbfg.kubepia.com")
 	@GetMapping(value="/RentDepoSndInf/{custNo}")
 	public ResponseEntity <List<RentDepoSendInfo>> getRentDepoSndInf(@PathVariable String custNo) { 
 		

@@ -31,7 +31,7 @@ podTemplate(containers: [
 	 		//git branch: 'main', url: 'https://github.com/happykube/hellonode.git'
 			// Java based on Spring Boot, branch : msa
 			// 여기에 자신의 gitlab repository의 msa branch로 바꾸세요.
-			git branch: 'msa', url: 'https://gitlab.com/eastshine96/sample-service.git'
+			git branch: 'msa', url: 'https://github.com/KB-40-nexthouse/nexthouse_BE.git'
 		} 
 
 		//-- 환경변수 파일 읽어서 변수값 셋팅 
@@ -115,18 +115,18 @@ podTemplate(containers: [
 			// Delete Deployment from Cluster in Kubernetes
 			stage( "Clean Up Existing Deployments" ) {
 				container("kubectl") {
-					sh "kubectl delete deployments -n ${namespace} --selector=${selector_key}=${selector_val}"
+					sh "kubectl delete -n ${namespace} -f ${deployment}"
 				}
 			}
 
 			// Deploy App to Cluster in Kubernetes
 			stage( "Deploy to Cluster" ) {
 				container("kubectl") {
-					sh "kubectl apply -n ${namespace} -f ${config}"
+					#sh "kubectl apply -n ${namespace} -f ${config}"
 					sh "kubectl apply -n ${namespace} -f ${deployment}"
-					sh "sleep 5"
-					sh "kubectl apply -n ${namespace} -f ${service}"
-					sh "kubectl apply -n ${namespace} -f ${ingress}"
+					#sh "sleep 5"
+					#sh "kubectl apply -n ${namespace} -f ${service}"
+					#sh "kubectl apply -n ${namespace} -f ${ingress}"
 				}
 			}
             echo "**** FINISH ALL STAGES : SUCCESS"

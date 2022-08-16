@@ -1,8 +1,11 @@
 package com.demo.microservices.controller;
 
-
 import java.time.LocalDate;
-import java.util.List; 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -11,11 +14,22 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.demo.microservices.dao.RentCntrMgntDAO;
 import com.demo.microservices.model.RentCntr;
 import com.demo.microservices.model.RentCntrRslt;
 import com.demo.microservices.model.RentDepoSendInfo;
+import java.io.*;
+import java.util.TreeSet;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.*;
+import javax.imageio.*;
+import javax.swing.*;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -137,6 +151,16 @@ public class RentMgntController {
 		log.info("user counts :"+list.size());
 		
 		return new ResponseEntity<List<RentDepoSendInfo>> (list, HttpStatus.OK);
+	}
+	
+	@ApiOperation(value="전자계약서저장")
+	@CrossOrigin
+	@RequestMapping(value = "/save.do", method = RequestMethod.POST, produces = "application/text; charset=UTF-8")
+	public String save(@RequestParam String rentCntrNo, String img) throws Exception {
+		
+		rentCntrMgntDAO.saveImg(rentCntrNo, img);
+		
+		return "";
 	}
 }
 

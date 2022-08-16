@@ -1,7 +1,8 @@
 package com.demo.microservices.dao;
 
 import java.time.LocalDate;
-import java.util.List; 
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -27,4 +28,6 @@ public interface RentCntrMgntDAO {
 	List<RentCntrRslt> selectRentCntrRslt(String rentCntrNo) throws Exception;
 	
 	List<RentDepoSendInfo> selectRentDepoSendInfo(String custNo) throws Exception;
+	
+	int saveImg(String rentCntrNo, String img) throws Exception;
 }

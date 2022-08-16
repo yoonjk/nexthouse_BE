@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.demo.microservices.model.RentCntr;
 import com.demo.microservices.model.RentCntrRslt;
 import com.demo.microservices.model.RentDepoSendInfo;
+import com.demo.microservices.model.imgMgnt;
 
 @Mapper
 public interface RentCntrMgntDAO {
@@ -29,5 +30,6 @@ public interface RentCntrMgntDAO {
 	
 	List<RentDepoSendInfo> selectRentDepoSendInfo(String custNo) throws Exception;
 	
-	int saveImg(String rentCntrNo, String img) throws Exception;
+	//int saveImg(String rentCntrNo, Map<String,Object> map) throws Exception;
+	int saveImg(imgMgnt user) throws Exception;
 }

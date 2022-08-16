@@ -118,13 +118,22 @@
 		WHERE 1=1
 		  AND C.CUST_NO = #{custNo}
 	</select>
-	<insert id="saveImg" parameterType="java.util.Map">
+<!-- 	<insert id="saveImg" parameterType="java.util.Map">
 		INSERT INTO CUST_IMAGES
 		SELECT 
 			CONCAT(CUST_NO, #{rentCntrNo}),
-			#{img},
+			#{base64},
 			CURRENT_DATE
 		FROM RENT_CNTR_INFO
 		WHERE RENT_CNTR_NO = #{rentCntrNo}
+	</insert> -->
+	<insert id="saveImg" parameterType="com.demo.microservices.model.imgMgnt">
+		INSERT INTO CUST_IMAGES
+		SELECT 
+			CONCAT(CUST_NO, #{id}),
+			#{img},
+			CURRENT_DATE
+		FROM RENT_CNTR_INFO
+		WHERE RENT_CNTR_NO = #{id}
 	</insert>
 </mapper>

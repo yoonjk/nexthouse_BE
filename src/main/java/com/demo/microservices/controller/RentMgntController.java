@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,8 @@ import com.demo.microservices.dao.RentCntrMgntDAO;
 import com.demo.microservices.model.RentCntr;
 import com.demo.microservices.model.RentCntrRslt;
 import com.demo.microservices.model.RentDepoSendInfo;
+import com.demo.microservices.model.imgMgnt;
+
 import java.io.*;
 import java.util.TreeSet;
 import java.awt.*;
@@ -153,14 +156,55 @@ public class RentMgntController {
 		return new ResponseEntity<List<RentDepoSendInfo>> (list, HttpStatus.OK);
 	}
 	
-	@ApiOperation(value="전자계약서저장")
-	@CrossOrigin
-	@RequestMapping(value = "/save.do", method = RequestMethod.POST, produces = "application/text; charset=UTF-8")
-	public String save(@RequestParam String rentCntrNo, String img) throws Exception {
+//	@ApiOperation(value="전자계약서저장")
+//	@CrossOrigin
+//	@RequestMapping(value = "/save.do", method = RequestMethod.POST, produces = "application/text; charset=UTF-8")
+//	public int save(@RequestParam String rentCntrNo, Map<String, Object> paramMap) throws Exception {
+//		
+//		Map<String,Object> map = new HashMap<String, Object>();
+//		
+//		String base64 = paramMap.get("base64").toString();
+//		
+//		byte[] bytes = base64.getBytes();
+//		
+//		map.put("bytes",bytes);
+//		
+//		rentCntrMgntDAO.saveImg(rentCntrNo, map);
+//		
+//		return 1;
+//	}
+//	@ApiOperation(value="전자계약서저장")
+//	@CrossOrigin
+//	@RequestMapping(value = "/save.do", method = RequestMethod.POST, produces = "application/text; charset=UTF-8")
+//	public int save(@RequestParam String rentCntrNo, String base64) throws Exception {
+//		
+//		rentCntrMgntDAO.saveImg(rentCntrNo, base64);
+//		
+//		return 1;
+//	}
+	
+	@ApiOperation(value="이미지등록")
+	@PostMapping(value="/save.do")
+	public ResponseEntity <String> save(@RequestBody imgMgnt img) { 
 		
-		rentCntrMgntDAO.saveImg(rentCntrNo, img);
+		int rc = 0;
+		String msg = null;
 		
-		return "";
+		try {
+			log.info("Start insert DB");
+			rc = rentCntrMgntDAO.saveImg(img);
+		} catch (Exception e) {
+			log.error("ERROR", e);
+			throw new RuntimeException(e);
+		}
+		log.info("add user rc:"+rc);
+		
+		if (rc > 0) {
+			msg =  "등록 성공";
+		}
+		
+		return new ResponseEntity<String> (msg, HttpStatus.OK);
 	}
+
 }
 

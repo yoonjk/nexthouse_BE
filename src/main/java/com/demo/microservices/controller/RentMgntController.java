@@ -184,6 +184,7 @@ public class RentMgntController {
 //	}
 	
 	@ApiOperation(value="이미지등록")
+	@CrossOrigin
 	@PostMapping(value="/save.do")
 	public ResponseEntity <String> save(@RequestBody imgMgnt img) { 
 		

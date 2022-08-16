@@ -118,15 +118,6 @@
 		WHERE 1=1
 		  AND C.CUST_NO = #{custNo}
 	</select>
-<!-- 	<insert id="saveImg" parameterType="java.util.Map">
-		INSERT INTO CUST_IMAGES
-		SELECT 
-			CONCAT(CUST_NO, #{rentCntrNo}),
-			#{base64},
-			CURRENT_DATE
-		FROM RENT_CNTR_INFO
-		WHERE RENT_CNTR_NO = #{rentCntrNo}
-	</insert> -->
 	<insert id="saveImg" parameterType="com.demo.microservices.model.imgMgnt">
 		INSERT INTO CUST_IMAGES
 		SELECT 
@@ -136,4 +127,14 @@
 		FROM RENT_CNTR_INFO
 		WHERE RENT_CNTR_NO = #{id}
 	</insert>
+	<select id="selectImg" resultType="com.demo.microservices.model.imgMgnt">
+		SELECT
+			ID,
+			IMG,
+			REG_DT
+		FROM
+			CUST_IMAGES
+		WHERE
+			ID = CONCAT((SELECT CUST_NO FROM RENT_CNTR_INFO WHERE RENT_CNTR_NO = #{rentCntrNo}),#{rentCntrNo})
+	</select>
 </mapper>

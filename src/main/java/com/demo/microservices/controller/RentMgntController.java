@@ -207,5 +207,25 @@ public class RentMgntController {
 		return new ResponseEntity<String> (msg, HttpStatus.OK);
 	}
 
+	@ApiOperation(value="이미지조회")
+	@CrossOrigin
+	@GetMapping(value="/ImgSel/{rentCntrNo}")
+	public ResponseEntity <List<imgMgnt>> getCustImg(@PathVariable String rentCntrNo) { 
+		
+		List<imgMgnt> list = null;
+		
+		try {
+			log.info("Start db select");
+			list = rentCntrMgntDAO.selectImg(rentCntrNo);
+			log.info("End db select");
+		} catch (Exception e) {
+			log.error("ERROR", e);
+			throw new RuntimeException(e);
+		}
+		
+		log.info("user counts :"+list.size());
+		
+		return new ResponseEntity<List<imgMgnt>> (list, HttpStatus.OK);
+	}
 }
 

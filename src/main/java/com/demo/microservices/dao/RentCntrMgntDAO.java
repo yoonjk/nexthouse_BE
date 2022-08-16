@@ -30,6 +30,7 @@ public interface RentCntrMgntDAO {
 	
 	List<RentDepoSendInfo> selectRentDepoSendInfo(String custNo) throws Exception;
 	
-	//int saveImg(String rentCntrNo, Map<String,Object> map) throws Exception;
 	int saveImg(imgMgnt user) throws Exception;
+	
+	List<imgMgnt> selectImg(String rentCntrNo) throws Exception;
 }

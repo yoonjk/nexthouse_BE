@@ -14,7 +14,8 @@
 			M.PROGRESS,
 			M.RENT_ST_DT,
 			M.RENT_END_DT,
-			M.RENT_CNTR_NO
+			M.RENT_CNTR_NO,
+			C.MODEL_IMG
 		FROM
 			(
 				SELECT 

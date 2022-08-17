@@ -21,4 +21,5 @@ public class RentCntr {
 	private String rentStDt;
 	private String rentEndDt;
 	private String rentCntrNo;
+	private String modelImg;
 }

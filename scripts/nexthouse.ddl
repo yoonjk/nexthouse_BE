@@ -1,0 +1,65 @@
+-- nexthouse.CUST_IMAGES definition
+
+CREATE TABLE `CUST_IMAGES` (
+  `ID` bigint NOT NULL,
+  `IMG` mediumblob,
+  `REG_DT` date DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+-- nexthouse.CUST_INFO definition
+
+CREATE TABLE `CUST_INFO` (
+  `CUST_NO` int NOT NULL AUTO_INCREMENT COMMENT '고객번호',
+  `CUST_IDFY_NO` varchar(13) NOT NULL COMMENT '고객식별번호',
+  `CUST_NM` varchar(20) NOT NULL COMMENT '고객명',
+  `CUST_TEL_NO` varchar(20) NOT NULL COMMENT '고객연락처',
+  `ACCT_NO` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '계좌번호',
+  `ACCT_BANK_NM` varchar(20) DEFAULT NULL COMMENT '계좌은행명',
+  `USE_CNT` int DEFAULT NULL,
+  PRIMARY KEY (`CUST_NO`)
+) ENGINE=InnoDB AUTO_INCREMENT=100000002 DEFAULT CHARSET=utf8mb3 COMMENT='고객정보';
+
+
+-- nexthouse.CUST_REG_MODEL_LST definition
+
+CREATE TABLE `CUST_REG_MODEL_LST` (
+  `CUST_NO` int NOT NULL COMMENT '고객번호',
+  `REG_MODEL_NO` varchar(10) NOT NULL COMMENT '등록모델번호',
+  `REG_DT` date NOT NULL COMMENT '등록일자',
+  PRIMARY KEY (`CUST_NO`,`REG_MODEL_NO`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='고객선호매물목록';
+
+
+-- nexthouse.MODEL_INFO definition
+
+CREATE TABLE `MODEL_INFO` (
+  `MODEL_NO` varchar(10) NOT NULL COMMENT '모델번호',
+  `MODEL_NM` varchar(50) NOT NULL COMMENT '모델명',
+  `MODEL_ADDR` varchar(200) NOT NULL COMMENT '모델주소',
+  `OWNER_NM` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '담당자명',
+  `OWNER_TEL_NO` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '담당자연락처',
+  `PRICE` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '가격',
+  `MODEL_SPEC` varchar(100) DEFAULT NULL COMMENT '모델스펙',
+  `MODEL_IMG` mediumblob COMMENT '모델이미지',
+  PRIMARY KEY (`MODEL_NO`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='매물정보';
+
+
+-- nexthouse.RENT_CNTR_INFO definition
+
+CREATE TABLE `RENT_CNTR_INFO` (
+  `RENT_CNTR_NO` int NOT NULL AUTO_INCREMENT COMMENT '임대계약번호',
+  `CUST_NO` int NOT NULL COMMENT '고객ID',
+  `MODEL_NO` varchar(10) NOT NULL COMMENT '모델번호',
+  `RENT_CNTR_STS_CD` char(1) NOT NULL COMMENT '임대계약상태코드',
+  `PROGRESS` int NOT NULL COMMENT '진행단계',
+  `CREATE_DT` date NOT NULL COMMENT '생성일자',
+  `RENT_ST_DT` date DEFAULT NULL COMMENT '임대시작일자',
+  `RENT_END_DT` date DEFAULT NULL COMMENT '임대종료일자',
+  `FIX_DT` date DEFAULT NULL COMMENT '확정일자',
+  `ENT_DT` date DEFAULT NULL COMMENT '전입신고일자',
+  PRIMARY KEY (`RENT_CNTR_NO`),
+  KEY `RENT_CNTR_INFO_IDX1` (`CUST_NO`,`RENT_CNTR_STS_CD`)
+) ENGINE=InnoDB AUTO_INCREMENT=100000209 DEFAULT CHARSET=utf8mb3 COMMENT='임대계약정보';
